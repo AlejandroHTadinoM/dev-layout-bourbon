@@ -10,21 +10,20 @@ html(lang="es")
 		link(rel='stylesheet' href='css/styles.min.css')
 		script(src=src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js")
 	body
-
-        h1 LAYOUT
-
-        //- Mixins ----------------------------------------
-            include mixin.pug
-
+		h1 LAYOUT
+		
+		//- Mixins ----------------------------------------
+			include mixin.pug
+			
 		//- Main Header ----------------------------------------
-		    include header.pug
-
+			include header.pug
+			
 		//- Main Content ----------------------------------------
 		block content
-
+			
 		//- Main Footer ----------------------------------------
-		    include footer.pug
-
+			include footer.pug
+			
 		//- Scripts ----------------------------------------
 		//-script.
 			jQuery || <script src="js/jquery.min.js"></script>
