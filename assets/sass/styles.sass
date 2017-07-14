@@ -1,6 +1,21 @@
-@inport '0-tools/0-tools'
-@inport '1-base/1-base'
-@inport '2-sections/2-sections'
+@import '_0-tools/0-tools'
+@import '_1-base/1-base'
+@import '_2-sections/2-sections'
 
 body
     background-color: #FAFAFA
+
+$col-third: (columns: 3, gutter: 1em)
+$col-half: (columns: 2, gutter: 1em)
+
+.row
+    @include grid-container
+
+.col-1
+    @include grid-column(1)
+
+.col-2
+    @include grid-column(1, $col-half)
+
+.col-3
+    @include grid-column(1, $col-third)

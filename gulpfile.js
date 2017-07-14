@@ -25,6 +25,12 @@ var gulp = require('gulp'),
 /*********** Static server ***********/
 	bs = require('browser-sync').create(),
 
+/*********** Compressing dist files ***********/
+	zip = require('gulp-zip'),
+
+/*********** Piping error handler ***********/
+	plumber = require('gulp-plumber'),
+
 /*********** Path vars ***********/
 	viewsSrc = 'cache/views/*.pug',
 	viewsCache = 'cache/',
@@ -54,12 +60,10 @@ gulp.task('copy', ['clean'], function () {
 /*********** HTML teplating and compiling ***********/
 gulp.task('pug', ['copy'], function () {
 	return gulp.src(viewsSrc)
+		.pipe(plumber())
 		.pipe(pug({
 			pretty: false
 		}))
-		.on('error',function(e){
-			console.log(e);
-		})
 		.pipe(gulp.dest(viewsDest));
 });
 
@@ -117,6 +121,12 @@ gulp.task('serve', function () {
 	});
 });
 
+gulp.task('compress', function () {
+    gulp.src(viewsDest)
+        .pipe(zip('dist.zip'))
+        .pipe(gulp.dest(viewsDest))
+});
+
 /*********** Watch files ***********/
 gulp.task('watch', function () {
  	gulp.watch('views/**/*.pug', ['pug']);
@@ -130,7 +140,7 @@ gulp.task('watch', function () {
 gulp.task('dev',['pug', 'sass', 'concat'])
 
 /*********** Build task ***********/
-gulp.task('build', ['pug', 'sass', 'concat', 'img']);
+gulp.task('build', ['pug', 'sass', 'concat', 'img', 'compress']);
 
 /*********** Default task ***********/
 gulp.task('default', ['dev', 'serve', 'watch']);
