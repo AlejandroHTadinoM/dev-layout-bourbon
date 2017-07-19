@@ -14,6 +14,13 @@ block content
         .row
             .col-1
                 .page-lead
-                    h1.page-title Titulo
+                    h1.page-title Bourbon Dev
                     p.page-desc Lorem ipsum dolor sit amet, consectetur adipisicing elit. Consequatur nemo in facere.
-                    a.btn(href="document") download
+                    .cta
+                        a.btn(href="document") download
+                        a.btn(href="#about") know more
+
+    include _1-sections/_1-about.pug
+    include _1-sections/_2-me.pug
+    include _1-sections/_3-manual.pug
+    include _1-sections/_4-footer.pug
