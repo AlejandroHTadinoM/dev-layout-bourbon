@@ -2,9 +2,6 @@
 @import '_1-base/1-base'
 @import '_2-sections/2-sections'
 
-body
-    background-color: #FAFAFA
-
 $col-third: (columns: 3, gutter: 1em)
 $col-half: (columns: 2, gutter: 1em)
 
@@ -12,10 +9,23 @@ $col-half: (columns: 2, gutter: 1em)
     @include grid-container
 
 .col-1
-    @include grid-column(1)
+    @include grid-column(12)
 
 .col-2
     @include grid-column(1, $col-half)
 
 .col-3
     @include grid-column(1, $col-third)
+
+*
+    margin: 0
+    padding: 0
+    box-sizing: border-box
+
+.cta
+    margin: .75em auto
+    padding: 1rem 2rem
+    display: inline-block
+    text-transform: uppercase
+    text-decoration: none
+    border-radius: 6px
