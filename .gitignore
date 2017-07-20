@@ -39,7 +39,5 @@ Thumbs.db
 # Theme related files #
 #######################
 src/
-dist/
 node_modules/
 imgSrc/
-dist/
