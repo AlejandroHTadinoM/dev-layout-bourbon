@@ -49,19 +49,19 @@ gulp.task('clean', function () {
 	.pipe(clean({
 		force: true,
 		read: false
-	}))
-});
+ 	}));
+}); 
 
 gulp.task('copy', ['clean'], function () {
 	return gulp.src('views/**/*.pug')
-		.pipe(copy(viewsCache))
+		.pipe(copy(viewsCache));
 });
 
 /*********** HTML teplating and compiling ***********/
 gulp.task('pug', ['copy'], function () {
 	return gulp.src(viewsSrc)
 		.pipe(plumber())
-		.pipe(pug({
+ 		.pipe(pug({
 			pretty: false
 		}))
 		.pipe(gulp.dest(viewsDest));
@@ -70,17 +70,17 @@ gulp.task('pug', ['copy'], function () {
 /*********** Styles compiling ***********/
 gulp.task('sass', function () {
 	return gulp.src(sassSrc)
-		.pipe(sass({
+ 		.pipe(sass({
 			ouputStyle: 'compressed'
 		})
 		.on('error', sass.logError))
 		.pipe(postcss([ autoprefixer () ]))
 		.pipe(purify([jsDest + '*.js', viewsDest + '*.html']))
-		.pipe(cleanCSS({debug: true}, function(details) {
+ 		.pipe(cleanCSS({debug: true}, function(details) {
       console.log(details.name + ': ' + details.stats.originalSize);
       console.log(details.name + ': ' + details.stats.minifiedSize);
     }))
-		.pipe(rename(function (path) {
+ 		.pipe(rename(function (path) {
 			path.basename += ".min";
 		}))
 		.pipe(gulp.dest(sassDest))
@@ -94,9 +94,9 @@ gulp.task('concat', function () {
 		.pipe(uglify())
 		.pipe(rename(function (path) {
 			path.basename += ".min";
-		}))
+ 		}))
 		.pipe(gulp.dest(jsDest));
-});
+}); 
 
 /*********** IMG minification ***********/
 gulp.task('img', function () {
@@ -108,24 +108,24 @@ gulp.task('img', function () {
 		imagemin.svgo({plugins: [{removeViewBox: true}]})
 	], {
 		verbose: true
-	}))
-	.pipe(gulp.dest(imgDest))
-});
+ 	}))
+	.pipe(gulp.dest(imgDest));
+}); 
 
 /*********** BrowserSync Serve ***********/
 gulp.task('serve', function () {
-	bs.init({
-		server: {
+ 	bs.init({
+		server: { 
 			baseDir: 'dist/'
 		}
 	});
-});
+}); 
 
 gulp.task('compress', function () {
     gulp.src(viewsDest)
         .pipe(zip('dist.zip'))
-        .pipe(gulp.dest(viewsDest))
-});
+        .pipe(gulp.dest(viewsDest));
+}); 
 
 /*********** Watch files ***********/
 gulp.task('watch', function () {
@@ -134,10 +134,10 @@ gulp.task('watch', function () {
 	gulp.watch('assets/js/*.js', ['concat']).on('change', bs.reload);
 	gulp.watch('assests/img/**/*.*', ['img']).on('change', bs.reload);
 	gulp.watch('dist/*.html').on('change', bs.reload);
-});
+}); 
 
 /*********** Dev Env task ***********/
-gulp.task('dev',['pug', 'sass', 'concat'])
+gulp.task('dev',['pug', 'sass', 'concat']);
 
 /*********** Build task ***********/
 gulp.task('build', ['pug', 'sass', 'concat', 'img', 'compress']);
